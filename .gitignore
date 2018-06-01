@@ -1,0 +1,24 @@
+# Keys and tokens
+api_token.txt
+personal_access_token.txt
+
+# BUNQ status files
+installation_token.txt
+private_key.txt
+public_key.txt
+server_public.txt
+session_token.txt
+
+# YNAB status files
+ynab_clientid.txt
+ynab_clientsecret.txt
+
+# VIM swap file
+.*.swp
+
+# Python temporary files
+*.pyc
+__pycache__
+
+# Archive directory
+archive
