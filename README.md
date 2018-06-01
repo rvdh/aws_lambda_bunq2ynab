@@ -46,7 +46,7 @@ Then run ./zip.sh to create the zipfile.
 * Configure the following Environment Variables:
 
 Environment Variable | How to get the value
--------------------------------------------
+-------------------- | --------------------
 BUNQ_API_TOKEN | From the bunq app - you need to Allow All IP-Addresses
 BUNQ_PRIVATE_KEY | ssh-keygen -t rsa -b 2048 -f private_key.pem && cat private_key.pem | base64
 LAMBDA_CALLBACK_URL | The "Invoke URL" value you copied from the API Gateway
@@ -60,7 +60,7 @@ YNAB_ACCESS_TOKEN | From nYab, account settings, Developer section
 * Configure the remaining environment variables:
 
 Environment Variable | How to get the value
--------------------------------------------
+-------------------- | --------------------
 BUNQ_INSTALLATION_TOKEN | From the output of the test above - without the single quotes
 BUNQ_SERVER_PUBLIC_KEY | From the output of the test above - without the single quotes
 BUNQ_USER_ID | From the output of the test above (line beginning with UserPerson)
@@ -73,7 +73,7 @@ BUNQ_ACCOUNT_ID | From the output of the test above - choose the account you wis
 * Configure the last environment variables:
 
 Environment Variable | How to get the value
--------------------------------------------
+-------------------- | --------------------
 YNAB_BUDGET_ID | Choose the GUID of the budget you want to use
 YNAB_ACCOUNT_ID | Choose the GUID of the account you want to import the transactions to
 
