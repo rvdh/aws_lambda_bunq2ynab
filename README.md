@@ -48,9 +48,9 @@ Then run ./zip.sh to create the zipfile.
 Environment Variable | How to get the value
 -------------------- | --------------------
 BUNQ_API_TOKEN | From the bunq app - you need to Allow All IP-Addresses
-BUNQ_PRIVATE_KEY | ssh-keygen -t rsa -b 2048 -f private_key.pem && cat private_key.pem | base64
+BUNQ_PRIVATE_KEY | ssh-keygen -t rsa -b 2048 -f private_key.pem && cat private_key.pem \| base64
 LAMBDA_CALLBACK_URL | The "Invoke URL" value you copied from the API Gateway
-YNAB_ACCESS_TOKEN | From nYab, account settings, Developer section
+YNAB_ACCESS_TOKEN | From nYnab, account settings, Developer section
 
 * At "Handler", type: list_user.lambda_handler
 * Click the "Test" button
