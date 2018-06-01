@@ -30,6 +30,7 @@ Then run ./zip.sh to create the zipfile.
 
 ### Uploading the deployment package
 * At 'Function code', select 'Upload a .ZIP file' under 'Code entry type'
+* Click 'Upload' and select the zipfile (from this repository or your own customized one)
 * Click Save
 
 ## Configuring AWS Lambda
