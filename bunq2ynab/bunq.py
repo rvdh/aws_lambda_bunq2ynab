@@ -93,7 +93,7 @@ def get_installation_token():
     if not server_public:
         raise Exception("No server public key returned by installation")
     else:
-        print("Set BUNQ_SERVER_PUBLIC_KEY to '%s'." % str(server_public.decode('utf-8'))
+        print("Set BUNQ_SERVER_PUBLIC_KEY to '%s'." % str(server_public.decode('utf-8')))
 
     os.environ['BUNQ_INSTALLATION_TOKEN'] = installation_token
     os.environ['BUNQ_SERVER_PUBLIC_KEY'] = str(server_public.decode('utf-8'))
