@@ -24,9 +24,11 @@ The changes I have made concern the storing of the bunq and YNAB access keys/tok
 The reason we need to upload a zipfile with the Python sourcecode, is that Lambda comes without any Python modules installed, so we create a deployment package with all needed modules.
 
 ### Creating your own deployment package
-If you want to create your own zipfile, you need access to a Linux box with Python3.6. When you have it, run the following command for every module you need (make sure the pip you are using is from Python3.6) *in* the bunq2ynab directory: 
-`pip install <module> -t .`
-Then run ./zip.sh to create the zipfile.
+If you want to create your own zipfile, you can do this with docker-compose. If you have docker and docker compose 
+installed, all that you need to do is run `docker-compose up` and the zip file will be created. It'll also create a 
+public and private key. It'll also create a file that contains the base64 encoded private key.
+
+After you have run `docker-compose up` you can use the updated zipfile.
 
 ### Uploading the deployment package
 * At 'Function code', select 'Upload a .ZIP file' under 'Code entry type'

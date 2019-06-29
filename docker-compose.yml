@@ -1,0 +1,8 @@
+version: "2"
+services:
+  python:
+    image: lambci/lambda:build-python3.7
+    volumes:
+      - .:/code
+    working_dir: /code
+    command: ./build.sh

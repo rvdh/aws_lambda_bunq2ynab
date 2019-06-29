@@ -22,14 +22,14 @@ def get_account_id(user_id, account_name):
 def get_callbacks(user_id, account_id):
    method = 'v1/user/{0}/monetary-account/{1}'.format(user_id, account_id)
    result = bunq.get(method)
-   return result[0]["MonetaryAccountBank"]["notification_filters"]
+   return result[0]["MonetaryAccountJoint"]["notification_filters"]
 
 
 def put_callbacks(user_id, account_id, new_notifications):
     data = {
          "notification_filters": new_notifications
     }
-    method = 'v1/user/{0}/monetary-account-bank/{1}'.format(
+    method = 'v1/user/{0}/monetary-account-joint/{1}'.format(
                                                            user_id, account_id)
     bunq.put(method, data)
 
