@@ -6,7 +6,7 @@ Get [bunq2ynab](https://github.com/wesselt/bunq2ynab) to run on AWS Lambda.
 * Go to AWS Lambda and click 'Create function'
   * We're going with the default 'Author from scratch'
 * Name it anything you like
-* Runtime: Python3.6
+* Runtime: Python3.8
 * Role:
   * Create new role from template
   * Name it anything you like
@@ -24,9 +24,7 @@ The changes I have made concern the storing of the bunq and YNAB access keys/tok
 The reason we need to upload a zipfile with the Python sourcecode, is that Lambda comes without any Python modules installed, so we create a deployment package with all needed modules.
 
 ### Creating your own deployment package
-If you want to create your own zipfile, you need access to a Linux box with Python3.6. When you have it, run the following command for every module you need (make sure the pip you are using is from Python3.6) *in* the bunq2ynab directory: 
-`pip install <module> -t .`
-Then run ./zip.sh to create the zipfile.
+If you want to create your own zipfile, run ./build.sh. This will build a docker image (so you need [docker](https://www.docker.com/)) and run it, which will recreate the bunq2ynab.zip and copy it into the current directory.
 
 ### Uploading the deployment package
 * At 'Function code', select 'Upload a .ZIP file' under 'Code entry type'
