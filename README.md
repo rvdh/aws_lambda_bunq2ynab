@@ -65,7 +65,6 @@ Environment Variable | How to get the value
 BUNQ_INSTALLATION_TOKEN | From the output of the test above - without the single quotes
 BUNQ_SERVER_PUBLIC_KEY | From the output of the test above - without the single quotes
 BUNQ_USER_ID | From the output of the test above (line beginning with UserPerson)
-BUNQ_ACCOUNT_ID | From the output of the test above - choose the account you wish to monitor
 
 * At "Handler", type: list_budget.lambda_handler
 * Click 'Save'
@@ -76,7 +75,6 @@ BUNQ_ACCOUNT_ID | From the output of the test above - choose the account you wis
 Environment Variable | How to get the value
 -------------------- | --------------------
 YNAB_BUDGET_ID | Choose the GUID of the budget you want to use
-YNAB_ACCOUNT_ID | Choose the GUID of the account you want to import the transactions to
 
 ## Registering the callback handler at bunq
 * At "Handler", type: auto_sync.add_callback
@@ -87,6 +85,10 @@ YNAB_ACCOUNT_ID | Choose the GUID of the account you want to import the transact
 * At "Handler", type: auto_sync.sync
 * Click 'Save'
 * Click the "Test" button
+
+## BUNQ_ACCOUNT_ID and YNAB_ACCOUNT_ID
+Previously, you needed to set BUNQ_ACCOUNT_ID and YNAB_ACCOUNT_ID to specify which bunq account you wanted to monitor and to which YNAB account those transactions should be imported into.
+This is still possible, however, the default behaviour now is to sync *all* bunq accounts and look up corresponding YNAB budgets with *exactly* the same name. Transactions will be imported there. If a corresponding YNAB account is not found, this is logged.
 
 ## Known issues
 When doing the first sync, some duplicate transactions may be imported with the wrong date.

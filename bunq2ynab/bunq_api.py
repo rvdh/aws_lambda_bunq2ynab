@@ -10,28 +10,36 @@ def get_user_id(user_name):
     raise Exception("BUNQ user '{0}' not found".format(user_name))
 
 
+def get_account_type(user_id, account_id):
+    reply = bunq.get('v1/user/{0}/monetary-account/{1}'.format(
+                     user_id, account_id))
+    return next(iter(reply[0]))
+
+
 def get_account_id(user_id, account_name):
-    reply = bunq.get('v1/user/' + user_id + '/monetary-account-bank')
-    for a in [a["MonetaryAccountBank"] for a in reply]:
-        if (a["description"].casefold() == account_name.casefold() or
-                str(a["id"]) == account_name):
-            return str(a["id"])
+    reply = bunq.get('v1/user/{0}/monetary-account'.format(user_id))
+    for entry in reply:
+        account_type = next(iter(entry))
+        account = entry[account_type]
+        if (account["description"].casefold() == account_name.casefold() or
+                str(account["id"]) == account_name):
+            return str(account["id"])
     raise Exception("BUNQ account '{0}' not found".format(account_name))
 
 
 def get_callbacks(user_id, account_id):
-   method = 'v1/user/{0}/monetary-account/{1}'.format(user_id, account_id)
-   result = bunq.get(method)
-   return result[0]["MonetaryAccountBank"]["notification_filters"]
+    method = (f"v1/user/{user_id}/monetary-account/{account_id}/" +
+               "notification-filter-url")
+    return bunq.get(method)
 
 
 def put_callbacks(user_id, account_id, new_notifications):
     data = {
          "notification_filters": new_notifications
     }
-    method = 'v1/user/{0}/monetary-account-bank/{1}'.format(
-                                                           user_id, account_id)
-    bunq.put(method, data)
+    method = (f"v1/user/{user_id}/monetary-account/{account_id}/" +
+               "notification-filter-url")
+    bunq.post(method, data)
 
 
 def get_transactions(user_id, account_id):
@@ -42,6 +50,7 @@ def get_transactions(user_id, account_id):
     print("Translating payments...")
     transactions = []
     first_day = None
+    last_day = None
     unsorted_payments = [p["Payment"] for p in payments]
     payments = sorted(unsorted_payments, key=lambda p: p["created"])
     for p in payments:
@@ -50,13 +59,16 @@ def get_transactions(user_id, account_id):
         date = p["created"][:10]
         if not first_day or date < first_day:
             first_day = date
+        if not last_day or last_day < date:
+            last_day = date
 
         transactions.append({
             "amount": p["amount"]["value"],
             "date": date,
             "payee": p["counterparty_alias"]["display_name"],
-            "description": p["description"]
+            "description": p["description"].strip()
         })
 
     # For correct duplicate calculation, return only complete days
-    return [t for t in transactions if first_day < t["date"]]
+    return [t for t in transactions
+            if first_day < t["date"] or t["date"] == last_day]
