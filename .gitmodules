@@ -1,0 +1,4 @@
+[submodule "bunq2ynab/bunq2ynab"]
+	path = bunq2ynab/bunq2ynab
+	url = git@github.com:wesselt/bunq2ynab.git
+	branch = master
