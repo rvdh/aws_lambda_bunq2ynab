@@ -10,7 +10,7 @@ import network
 import os
 import time
 
-required_variables = ['BUNQ_USER_ID', 'BUNQ_PRIVATE_KEY', 'BUNQ_API_TOKEN', 
+required_variables = ['BUNQ_USER_ID', 'BUNQ_PRIVATE_KEY', 'BUNQ_API_TOKEN',
                       'LAMBDA_CALLBACK_URL',
                       'YNAB_BUDGET_ID', 'YNAB_ACCESS_TOKEN']
 
@@ -31,11 +31,10 @@ for envvar in optional_variables:
         print("Warning: %s environment variable is not set. Will attempt to syncronize every BUNQ account to a YNAB account." % envvar)
 
 print("Getting BUNQ identifiers...")
-bunq_user_id = os.getenv('BUNQ_USER_ID') 
+bunq_user_id = os.getenv('BUNQ_USER_ID')
 
 print("Getting YNAB identifiers...")
-ynab_budget_id = os.getenv('YNAB_BUDGET_ID') 
-ynab_account_id = os.getenv('YNAB_ACCOUNT_ID') 
+ynab_budget_id = os.getenv('YNAB_BUDGET_ID')
 
 
 def add_callback(arg1, arg2):
@@ -65,7 +64,7 @@ def update_callbacks(bunq_account_id, new_nfs):
 
 
 def set_autosync_callbacks(new_nfs):
-    bunq_account_id = os.getenv('BUNQ_ACCOUNT_ID') 
+    bunq_account_id = os.getenv('BUNQ_ACCOUNT_ID')
     url = os.getenv('LAMBDA_CALLBACK_URL')
 
     if bunq_account_id is not None:
@@ -98,7 +97,8 @@ def get_ynab_account_id(bunq_account_description):
 
 
 def sync(arg1, arg2):
-    bunq_account_id = os.getenv('BUNQ_ACCOUNT_ID') 
+    bunq_account_id = os.getenv('BUNQ_ACCOUNT_ID')
+    ynab_account_id = os.getenv('YNAB_ACCOUNT_ID')
 
     if bunq_account_id is None:
 
@@ -114,7 +114,7 @@ def sync(arg1, arg2):
                 if ynab_account_id is not None:
                     sync_bunq_to_ynab(bunq_user_id, bunq_account_id, ynab_budget_id, ynab_account_id)
                 else:
-                    print(f"No YNAB account with name {bunq_account_description} found, skipping.") 
+                    print(f"No YNAB account with name {bunq_account_description} found, skipping.")
 
     else:
         sync_bunq_to_ynab(bunq_user_id, bunq_account_id, ynab_budget_id, ynab_account_id)
